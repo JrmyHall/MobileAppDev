@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Entry Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>Data Entry Page</h1>
+    <form id="transactionForm">
+        <label for="transactionDate">Transaction Date:</label><br>
+        <input type="date" id="transactionDate" name="transactionDate" value="2024-03-10"><br><br>
+        <label for="transactionType">Transaction Type:</label><br>
+        <select id="transactionType" name="transactionType">
+            <option value="credit">Credit</option>
+            <option value="debit">Debit</option>
+        </select><br><br>
+        <label for="amount">Amount:</label><br>
+        <input type="number" id="amount" name="amount"><br><br>
+        <input type="button" value="Submit" onclick="submitTransaction()">
+    </form>
+
+    <div id="transactionHistory">
+        <h2>Transaction History</h2>
+        <ul id="historyList">
+            <!-- Transaction history will be displayed here -->
+        </ul>
+    </div>
+    <ul>
+        <li><a href="index.html">Index</a></li>
+        <li><a href="introduction.html">Introduction</a></li>
+        <li><a href="password_entry.html">Password-Based Entry Page</a></li>
+        <li><a href="basic_info.html">Basic Information Page</a></li>
+        <li><a href="menu.html">Menu Page</a></li>
+    </ul>
+</div>
+<script>
+    var balance = 0; // Initialize balance
+    // Consider using localStorage or a server-side solution for persistence
+
+    function submitTransaction() {
+        var transactionType = document.getElementById('transactionType').value;
+        var amount = parseFloat(document.getElementById('amount').value);
+        var transactionDate = document.getElementById('transactionDate').value;
+
+        if (isNaN(amount)) {
+            alert('Please enter a valid amount.');
+            return;
+        }
+
+        if (transactionType === 'debit') {
+            balance -= amount; // Deduct amount for debit
+        } else {
+            balance += amount; // Add amount for credit
+        }
+
+        // Calculate interest charges or accumulation (You can add your logic here)
+
+        updateHistory(transactionType, amount, balance, transactionDate);
+    }
+
+    function updateHistory(transactionType, amount, balance, transactionDate) {
+        var historyList = document.getElementById('historyList');
+        var listItem = document.createElement('li');
+        var transactionText = transactionType.charAt(0).toUpperCase() + transactionType.slice(1); // Capitalize first letter
+
+        listItem.textContent = transactionDate + ' - ' + transactionText + ': $' + amount.toFixed(2) + ' | Balance: $' + balance.toFixed(2);
+        historyList.appendChild(listItem);
+    }
+</script>
+</body>
+</html>

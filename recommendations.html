@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommendations</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>Recommendations</h1>
+    <div id="recommendation"></div>
+</div>
+<script>
+    // Dummy current balance and line of credit - replace with actual data retrieval
+    const currentBalance = -40; // Example: $-40
+    const lineOfCredit = 100; // Example: $100
+
+    function displayRecommendation(balance, lineOfCredit) {
+        let recommendationText = '';
+        let alertClass = '';
+        if (balance > 0) {
+            recommendationText = 'Your balance is positive. Great job!';
+            alertClass = 'alert-green';
+        } else if (balance >= -0.5 * lineOfCredit) {
+            recommendationText = 'Your balance is less than 50% of your line of credit. Caution.';
+            alertClass = 'alert-yellow';
+        } else if (balance >= -0.8 * lineOfCredit) {
+            recommendationText = 'Your balance is between 50% and 80% of your line of credit. Warning.';
+            alertClass = 'alert-amber';
+        } else {
+            recommendationText = 'Your balance exceeds 80% of your line of credit. Critical!';
+            alertClass = 'alert-red';
+        }
+
+        const recommendationDiv = document.getElementById('recommendation');
+        recommendationDiv.className = alertClass;
+        recommendationDiv.textContent = recommendationText;
+    }
+
+    displayRecommendation(currentBalance, lineOfCredit);
+</script>
+</body>
+</html>

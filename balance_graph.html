@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balance Graph</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1>Balance Graph</h1>
+    <canvas id="balanceGraph"></canvas>
+</div>
+<script>
+    // Dummy data - replace this with actual data retrieval logic
+    const balanceData = [
+        { date: '2024-03-01', balance: 100 },
+        { date: '2024-03-02', balance: 80 },
+        { date: '2024-03-03', balance: -50 },
+        // Add more data points as needed
+    ];
+
+    const ctx = document.getElementById('balanceGraph').getContext('2d');
+    const chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: balanceData.map(data => data.date),
+            datasets: [{
+                label: 'Balance Over Time',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: balanceData.map(data => data.balance),
+            }]
+        },
+        options: {}
+    });
+</script>
+</body>
+</html>
